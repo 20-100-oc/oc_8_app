@@ -29,8 +29,10 @@ def select_img(folder_path='.'):
     indexes = list(range(len(imgs)))
     index = st.selectbox('Select an image:', indexes)
 
+    i = imgs[index][6:-4]
     selected_img = folder_path + '/' + imgs[index]
-    selected_mask = folder_path + '/' + masks[index]
+    #selected_mask = folder_path + '/' + masks[index]
+    selected_mask = folder_path + '/' + 'mask_' + i + '.png'
 
     return selected_img, selected_mask
 
