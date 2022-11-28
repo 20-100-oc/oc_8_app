@@ -27,7 +27,7 @@ def select_img(folder_path='.'):
     masks = [filename for filename in filenames if filename.startswith('mask')]
 
     indexes = list(range(len(imgs)))
-    index = st.selectbox('Select an image index', indexes)
+    index = st.selectbox('Select an image:', indexes)
 
     selected_img = folder_path + '/' + imgs[index]
     selected_mask = folder_path + '/' + masks[index]
@@ -58,7 +58,6 @@ def main():
 
     st.title('Image Segmentation')
     img_path, mask_path = select_img(folder_path=samples_dir)
-    st.write(f'You selected `{img_path}`')
 
     img_pil = Image.open(img_path)
     st.image(img_pil, caption='image')
