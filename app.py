@@ -52,8 +52,8 @@ def temp():
 
 
 def main():
-    #url = 'http://127.0.0.1:8000/'    # local url
-    url = 'https://oc-8-api.azurewebsites.net/'
+    url = 'http://127.0.0.1:8000/'    # local url
+    #url = 'https://oc-8-api.azurewebsites.net/'
 
     samples_dir = './samples'
 
@@ -67,28 +67,18 @@ def main():
     st.image(mask_pil, caption='mask')
 
 
-    # to send: save image to an in-memory bytes buffer
-    with io.BytesIO() as buf:
-        img_pil.save(buf, format='PNG')
-        buf.seek(0)
-        img_pil_bytes = buf.read()
+    img_pil_bytes = open(img_path, 'rb')
 
 
     predict_btn = st.button('Predict')
     if predict_btn:
-
-        headers = {
-            'accept': 'application/json',
-            # requests won't add a boundary if this header is set when you pass files=
-            # 'Content-Type': 'multipart/form-data',
-            }
         files = {
-            'image': open(img_path, 'rb'), 
+            'image': img_pil_bytes, 
             }
         
-        r = requests.post(url, headers=headers, files=files)
+        r = requests.post(url, files=files)
 
-        try:            
+        try:
             pred_pil_bytes = io.BytesIO(r.content)
             pred_pil = Image.open(pred_pil_bytes)
             st.image(pred_pil, caption='predicton')
@@ -97,7 +87,7 @@ def main():
             st.write('Raw json returned by api:')
             st.write(r.text)
             raise e
-
+        
 
 
 if __name__ == '__main__':
