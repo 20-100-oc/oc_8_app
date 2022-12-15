@@ -1,9 +1,6 @@
 # Front end app to interact with the api deployed on Azure.
 # To use this, initialize the api first.
 
-#TODO instructions
-
-
 import os
 import io
 
@@ -21,6 +18,7 @@ def select_img_old(folder_path='.'):
     return folder_path + '/' + selected_filename
 
 
+
 def select_img(folder_path='.'):
     filenames = os.listdir(folder_path)
     imgs = [filename for filename in filenames if filename.startswith('image')]
@@ -31,29 +29,15 @@ def select_img(folder_path='.'):
 
     i = imgs[index][len('image_') : -len('.png')]
     selected_img = folder_path + '/' + imgs[index]
-    #selected_mask = folder_path + '/' + masks[index]
     selected_mask = folder_path + '/' + 'mask_' + i + '.png'
 
     return selected_img, selected_mask
 
 
-def temp():
-    '''
-    # Select a file
-    if st.checkbox('Select a file in current directory'):
-        folder_path = '.'
-        if st.checkbox('Change directory'):
-            folder_path = st.text_input('Enter folder path', '.')
-        filename = file_selector(folder_path=folder_path)
-        st.write(f'You selected `{filename}`')
-    '''
-
-
-
 
 def main():
-    url = 'http://127.0.0.1:8000/'    # local url
-    #url = 'https://oc-8-api.azurewebsites.net/'
+    #url = 'http://127.0.0.1:8000/'    # local url
+    url = 'https://oc-8-api.azurewebsites.net/'
 
     samples_dir = './samples'
 
