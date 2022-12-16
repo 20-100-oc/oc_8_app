@@ -36,8 +36,8 @@ def select_img(folder_path='.'):
 
 
 def main():
-    #url = 'http://127.0.0.1:8000/'    # local url
-    url = 'https://oc-8-api.azurewebsites.net/'
+    url = 'http://127.0.0.1:8000/'    # local url
+    #url = 'https://oc-8-api.azurewebsites.net/'
 
     samples_dir = './samples'
 
